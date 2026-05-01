@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Sathi - Premium</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <!-- Futuristic Login Screen -->
+    <div id="login-screen" class="welcome-screen">
+        <div class="cyber-grid"></div>
+        <div class="glowing-orb"></div>
+        <div class="welcome-content login-content glass-panel">
+            <div class="logo-icon large-logo pulse"><i class="fas fa-bolt"></i></div>
+            <h2 class="glitch-text">AI Sathi <span class="badge">PRO</span></h2>
+            <p class="cyber-text">Initiate neural handshake to access Image Generation, Global News, and Studio Tools.</p>
+            
+            <div class="feature-pills">
+                <span><i class="fas fa-brain"></i> Neural Net</span>
+                <span><i class="fas fa-video"></i> Video Gen</span>
+                <span><i class="fas fa-utensils"></i> Culinary AI</span>
+            </div>
+
+            <button id="google-login-btn" class="cyber-btn">
+                <i class="fab fa-google"></i> INITIATE LOGIN
+            </button>
+            <div class="welcome-credit">SYSTEM ARCHITECT: ADITYA</div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="app-container" class="app-wrapper hidden">
+        
+        <!-- Sidebar for Pro Tools -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-bolt"></i> Pro Tools</h3>
+            </div>
+            <div class="tool-list">
+                <button class="tool-btn" onclick="startVideoCall()"><i class="fas fa-video"></i> AI Video Call</button>
+                <button class="tool-btn" onclick="document.getElementById('chat-input').value='Generate a 60s video of a futuristic cyberpunk city'; document.getElementById('send-btn').click();"><i class="fas fa-film"></i> 60s Video Gen</button>
+                <button class="tool-btn" onclick="alert('Pro Feature: Magic Object Remover requires an advanced vision model backend. Coming in V2!')"><i class="fas fa-eraser"></i> Object Remover</button>
+                <button class="tool-btn" onclick="document.getElementById('chat-input').value='Help me write a highly detailed prompt for an AI image generator'; document.getElementById('send-btn').click();"><i class="fas fa-magic"></i> Prompt Maker</button>
+                <button class="tool-btn" onclick="document.getElementById('chat-input').value='I need some business advice and strategy for my startup'; document.getElementById('send-btn').click();"><i class="fas fa-briefcase"></i> Business Help</button>
+                <button class="tool-btn" onclick="document.getElementById('chat-input').value='Give me a quick 10-minute healthy dinner recipe using chicken and rice'; document.getElementById('send-btn').click();"><i class="fas fa-utensils"></i> Kitchen Help</button>
+                <button class="tool-btn" onclick="document.getElementById('chat-input').value='Generate an image of a futuristic city in space'; document.getElementById('send-btn').click();"><i class="fas fa-image"></i> Try Image Gen</button>
+            </div>
+        </aside>
+        <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+        <!-- Chat Area -->
+        <div class="main-chat-area">
+            <header class="app-header">
+                <div class="logo">
+                    <button id="sidebar-toggle" class="mobile-menu-btn" title="Open Pro Tools"><i class="fas fa-bars"></i></button>
+                    <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+                    <h1>AI Sathi</h1>
+                </div>
+                <div class="controls">
+                    <span id="user-greeting" class="user-greeting"></span>
+                    <select id="language-select" class="language-select" title="Select Language">
+                        <option value="auto">Auto-Detect</option>
+                        <option value="en-US">English</option>
+                        <option value="en-IN">Hinglish</option>
+                        <option value="hi-IN">Hindi</option>
+                    </select>
+                    <button id="theme-btn" class="theme-btn" title="Toggle Light/Dark Mode"><i class="fas fa-sun"></i></button>
+                </div>
+            </header>
+
+            <main class="chat-container">
+                <div id="chat-box" class="chat-box">
+                    <div class="message ai-message">
+                        <div class="avatar"><i class="fas fa-bolt"></i></div>
+                        <div class="content">Namaste! I am AI Sathi. I am now equipped with <strong>AI Image Generation</strong>, Live News, and Business Strategy tools!
+                        <br><br>
+                        <strong>Try saying:</strong><br>
+                        • "Generate an image of a flying car"<br>
+                        • "What is the latest news in India?"<br>
+                        • "How do I grow my business?"
+                        </div>
+                    </div>
+                </div>
+                <div class="typing-indicator hidden" id="typing-indicator">
+                    <span></span><span></span><span></span>
+                </div>
+            </main>
+
+            <footer class="app-footer">
+                <div class="input-container">
+                    <button id="mic-btn" class="mic-btn" title="Click to speak">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <input type="text" id="chat-input" placeholder="Ask anything or say 'Generate image of...'" autocomplete="off">
+                    <button id="send-btn" class="send-btn"><i class="fas fa-paper-plane"></i></button>
+                </div>
+                <div class="footer-bottom">
+                    <div id="voice-status" class="voice-status">Say "Hey Sathi" to wake.</div>
+                    <div class="credit-text">Made & Designed by Aditya</div>
+                </div>
+                <div id="mic-warning" class="mic-warning hidden">
+                    <i class="fas fa-shield-check"></i> <strong>To fix Mic permissions:</strong> Run the <code>start_ai_sathi.py</code> file in your folder. This starts a local server so Chrome remembers your "Allow" choice forever!
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- AI Video Call Overlay -->
+    <div id="video-call-overlay" class="video-call-overlay hidden">
+        <video class="ai-avatar-video" autoplay loop muted playsinline>
+            <!-- A futuristic abstract neural network / robot stock video -->
+            <source src="https://cdn.pixabay.com/video/2021/08/04/83863-584742713_large.mp4" type="video/mp4">
+        </video>
+        
+        <div class="user-pip-container">
+            <video id="user-webcam" autoplay muted playsinline></video>
+        </div>
+
+        <div class="call-header">
+            <h2>AI Sathi <span class="live-badge">LIVE</span></h2>
+            <p id="call-status">Connecting to neural network...</p>
+        </div>
+
+        <div class="call-controls-bar">
+            <button class="call-btn active" id="call-mic-btn"><i class="fas fa-microphone"></i></button>
+            <button class="call-btn end-call" id="end-call-btn" onclick="endVideoCall()"><i class="fas fa-phone-slash"></i></button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
